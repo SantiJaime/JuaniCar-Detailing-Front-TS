@@ -58,8 +58,8 @@ const ServiceView: React.FC<ServiceProps> = ({ service }) => {
                   </Col>
                   <Col sm={12}>
                     <Button
-                      variant="gradient"
-                      color="deep-purple"
+                      variant="filled"
+                      color="white"
                       className="flex items-center justify-center gap-2 normal-case"
                       fullWidth
                     >

@@ -92,6 +92,32 @@ main {
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
+.divFecha{
+  display: flex;
+  justify-content: space-around;
+}
+.formWidth{
+  width: 50%;
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: #ffffff;
+  transition: background-color 5000s ease-in-out 0s;
+  box-shadow: inset 0 0 20px 20px #23232329;
+}
+@media(width < 767px) {
+  .formWidth{
+    width: 100%;
+  }
+}
+@media(width < 960px) {
+  .divFecha{
+    flex-direction: column;
+  }
+}
 @media (width < 576px) {
   .rowButtons {
     display: flex;
