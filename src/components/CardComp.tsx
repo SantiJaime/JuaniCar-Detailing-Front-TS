@@ -1,6 +1,4 @@
-import {
-  CalendarDaysIcon,
-} from "@heroicons/react/24/outline";
+import { CalendarDaysIcon } from "@heroicons/react/24/outline";
 import {
   Card,
   CardHeader,
@@ -19,7 +17,7 @@ interface Props {
 
 const CardComp: React.FC<Props> = ({ service }) => {
   return (
-    <Col lg={4} md={6} sm={12} className="my-3 flex justify-center">
+    <Col lg={4} md={6} sm={12} className="my-3 flex justify-center" data-aos="flip-left">
       <Card className="mt-6 w-96 bg-gray-900 text-gray-50">
         <CardHeader color="blue-gray" className="relative h-56">
           <img src={service.img} alt={service.nombre} />
@@ -31,11 +29,15 @@ const CardComp: React.FC<Props> = ({ service }) => {
           <Typography>${service.precio}</Typography>
         </CardBody>
         <CardFooter className="flex justify-around pt-0">
-          <Button variant="gradient" className="flex items-center gap-1">
+          <Button
+            variant="filled"
+            color="white"
+            className="flex items-center gap-1"
+          >
             <CalendarDaysIcon className="size-5" />
             <span>Solicitar turno</span>
           </Button>
-          <ServiceView service={service}/>
+          <ServiceView service={service} />
         </CardFooter>
       </Card>
     </Col>

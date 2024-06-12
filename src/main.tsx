@@ -4,7 +4,7 @@ import App from "./App.tsx";
 import { ThemeProvider } from "@material-tailwind/react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
-// import "bootstrap/dist/js/bootstrap.bundle.js";
+import "aos/dist/aos.css";
 import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(

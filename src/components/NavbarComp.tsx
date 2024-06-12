@@ -64,7 +64,7 @@ const NavbarComp = () => {
   );
 
   return (
-    <Navbar className="mx-auto rounded-none rounded-t-lg border-0 bg-gray-900/100 px-4 py-2 lg:px-8 lg:py-4">
+    <Navbar className="mx-auto rounded-none border-0 bg-gray-900/100 px-4 py-2 lg:rounded-lg lg:px-8 lg:py-4" data-aos="fade-down">
       <div className="container mx-auto flex items-center">
         <Link to={"/"} className="link-container">
           <Image

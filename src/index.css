@@ -2,8 +2,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-body,
-html {
+body {
   overflow-x: hidden;
 }
 .App {
@@ -47,6 +46,51 @@ main {
 }
 .footerTextAlign {
   text-align: end;
+}
+.modal-open {
+  padding-right: 0 !important;
+}
+.btn-wsp {
+  position: fixed;
+  width: 55px;
+  height: 55px;
+  line-height: 55px;
+  bottom: 20px;
+  right: 20px;
+  background: #0df053;
+  color: #fff;
+  border-radius: 50px;
+  text-align: center;
+  font-size: 30px;
+  box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.3);
+  z-index: 100;
+}
+.btn-wsp:hover {
+  text-decoration: none;
+  color: #0df053;
+  background: #fff;
+}
+.buttonWhite:hover {
+  background: linear-gradient(
+    45deg,
+    #f09433 0%,
+    #e6683c 25%,
+    #dc2743 50%,
+    #cc2366 75%,
+    #bc1888 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  transition: color 0.3s ease, -webkit-text-fill-color 0.3s ease;
+  border: solid 1px rgb(66 66 66);
+}
+.buttonWhite {
+  background-color: rgb(66 66 66);
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 @media (width < 576px) {
   .rowButtons {

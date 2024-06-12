@@ -18,6 +18,7 @@ const ServiceView: React.FC<Props> = ({ service }) => {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  
   return (
     <>
       <Button
@@ -29,8 +30,8 @@ const ServiceView: React.FC<Props> = ({ service }) => {
         <ArrowLongRightIcon className="size-5" />
       </Button>
 
-      <Modal show={show} onHide={handleClose} centered size="xl">
-        <div className="bg-gray-900 ">
+      <Modal show={show} onHide={handleClose} centered size="xl" className="modal-open">
+        <div className="bg-gray-900">
           <Modal.Body>
             <Row>
               <Col sm={5}>
