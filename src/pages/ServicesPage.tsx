@@ -2,7 +2,7 @@ import { Typography } from "@material-tailwind/react";
 import { Container, Row } from "react-bootstrap";
 import CardComp from "../components/CardComp";
 import { SERVICES } from "../constants/const";
-import { type Service } from "src/types";
+
 
 const ServicesPage = () => {
   return (

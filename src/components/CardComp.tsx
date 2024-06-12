@@ -8,14 +8,9 @@ import {
   Button,
 } from "@material-tailwind/react";
 import { Col } from "react-bootstrap";
-import { type Service } from "src/types";
 import ServiceView from "./ServiceView";
 
-interface Props {
-  service: Service;
-}
-
-const CardComp: React.FC<Props> = ({ service }) => {
+const CardComp: React.FC<ServiceProps> = ({ service }) => {
   return (
     <Col lg={4} md={6} sm={12} className="my-3 flex justify-center" data-aos="flip-left">
       <Card className="mt-6 w-96 bg-gray-900 text-gray-50">

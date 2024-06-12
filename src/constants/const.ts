@@ -1,5 +1,3 @@
-import { Service } from "src/types";
-
 export const SERVICES: Service[] = [
   {
     nombre: "Lavado premium",

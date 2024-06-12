@@ -3,7 +3,6 @@ import { Button, Typography } from "@material-tailwind/react";
 import { Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import CardComp from "../components/CardComp";
-import { type Service } from "src/types";
 import { SERVICES } from "../constants/const";
 
 const HomePage = () => {

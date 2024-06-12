@@ -16,7 +16,7 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "baseUrl": ".",
-    "typeRoots": ["./types", "./node_modules/@types"],
+    "typeRoots": ["./src/types/types", "./node_modules/@types"],
     "types": ["node"],
   },
   "include": ["src", "vite.config.ts"],

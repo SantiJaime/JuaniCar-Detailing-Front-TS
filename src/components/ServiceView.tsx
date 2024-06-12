@@ -7,13 +7,8 @@ import { Button, Typography } from "@material-tailwind/react";
 import { useState } from "react";
 import { Col, Image, Row } from "react-bootstrap";
 import Modal from "react-bootstrap/Modal";
-import { type Service } from "src/types";
 
-interface Props {
-  service: Service;
-}
-
-const ServiceView: React.FC<Props> = ({ service }) => {
+const ServiceView: React.FC<ServiceProps> = ({ service }) => {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
