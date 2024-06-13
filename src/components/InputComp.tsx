@@ -1,16 +1,10 @@
 import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
 import { ReactNode } from "react";
 
-interface Props {
-  id: string;
-  name: string;
-  type: string;
+interface Props extends InputAndSelect {
   placeholder: string;
-  label: string;
   icon: ReactNode;
-  value: string;
-  errors?: string;
-  touched?: boolean;
+  type: string;
   onChange: (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;

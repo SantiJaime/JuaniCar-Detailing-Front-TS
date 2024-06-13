@@ -1,16 +1,10 @@
 import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
 import { ReactNode } from "react";
 
-interface Props {
-  label: string;
-  onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
-  name: string;
-  id: string;
+interface Props extends InputAndSelect {
   icon: ReactNode;
   options: string[];
-  value: string;
-  errors?: string;
-  touched?: boolean;
+  onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
 const SelectComp: React.FC<Props> = ({
