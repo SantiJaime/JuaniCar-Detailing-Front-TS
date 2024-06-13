@@ -34,6 +34,8 @@ export const SERVICES: Service[] = [
   },
 ];
 
+export const PHONE_NUMBER: string = import.meta.env.VITE_PHONE_NUMBER;
+
 export const VEHICLES = ["Sin seleccionar opción", "Auto", "Camioneta", "Moto"];
 
 export const SERVICES_NAMES = [
