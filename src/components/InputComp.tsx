@@ -1,5 +1,4 @@
 import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
-import { ReactNode } from "react";
 import {
   DIV_ICON_CLASSES,
   TURN_INPUT_CLASSES,
@@ -8,7 +7,6 @@ import {
 
 interface Props extends InputAndSelect {
   placeholder: string;
-  icon: ReactNode;
   type: InputType;
   onChange: (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>

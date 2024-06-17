@@ -16,6 +16,7 @@ interface InputAndSelect {
   name: string;
   label: string;
   value: string;
+  icon: React.JSX.Element;
   errors?: string;
   touched?: boolean;
 }

@@ -64,7 +64,10 @@ const NavbarComp = () => {
   );
 
   return (
-    <Navbar className="mx-auto rounded-none border-0 bg-gray-900/100 px-4 py-2 lg:rounded-lg lg:px-8 lg:py-4" data-aos="fade-down">
+    <Navbar
+      className="mx-auto rounded-none border-0 bg-gray-900/100 px-4 py-2 lg:rounded-lg lg:px-8 lg:py-4"
+      data-aos="fade-down"
+    >
       <div className="container mx-auto flex items-center">
         <Link to={"/"} className="link-container">
           <Image
@@ -75,27 +78,11 @@ const NavbarComp = () => {
           />
         </Link>
         <div className="mx-auto hidden lg:block">{navList}</div>
-        {/* <div className="flex items-center gap-x-1">
-          <Button
-            variant="gradient"
-            size="sm"
-            className="hidden lg:inline-block"
-          >
-            <span>Log In</span>
-          </Button>
-          <Button
-            variant="gradient"
-            size="sm"
-            className="hidden lg:inline-block"
-          >
-            <span>Sign in</span>
-          </Button>
-        </div> */}
         <IconButton
           variant="text"
           className="ml-auto size-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
           ripple={false}
-          onClick={() => setOpenNav(!openNav)}
+          onClick={() => setOpenNav((prevState) => !prevState)}
         >
           {openNav ? (
             <XMarkIcon className="size-6" />
@@ -105,17 +92,7 @@ const NavbarComp = () => {
         </IconButton>
       </div>
       <Collapse open={openNav}>
-        <div className="container mx-auto">
-          {navList}
-          {/* <div className="flex items-center gap-x-1">
-            <Button fullWidth variant="text" size="sm" className="">
-              <span>Log In</span>
-            </Button>
-            <Button fullWidth variant="gradient" size="sm" className="">
-              <span>Sign in</span>
-            </Button>
-          </div> */}
-        </div>
+        <div className="container mx-auto">{navList}</div>
       </Collapse>
     </Navbar>
   );
