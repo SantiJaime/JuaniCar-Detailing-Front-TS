@@ -4,6 +4,7 @@ import NavbarComp from "./components/NavbarComp";
 import FooterComp from "./components/FooterComp";
 import Aos from "aos";
 import { PHONE_NUMBER } from "./constants/const";
+import { WhatsappIcon } from "./components/Icons";
 
 const App = () => {
   Aos.init({
@@ -19,9 +20,9 @@ const App = () => {
           <Link
             to={`https://wa.me/${PHONE_NUMBER}`}
             target="_blank"
-            className="btn-wsp text-center transition-all"
+            className="btn-wsp transition-all"
           >
-            <i className="bi bi-whatsapp"></i>
+            <WhatsappIcon className="size-8" />
           </Link>
         </main>
         <FooterComp />
