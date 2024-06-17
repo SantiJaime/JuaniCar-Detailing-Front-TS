@@ -17,14 +17,14 @@ const App = () => {
         <NavbarComp />
         <main>
           <RoutesView />
-          <Link
-            to={`https://wa.me/${PHONE_NUMBER}`}
-            target="_blank"
-            className="btn-wsp transition-all"
-          >
-            <WhatsappIcon className="size-8" />
-          </Link>
         </main>
+        <Link
+          to={`https://wa.me/${PHONE_NUMBER}`}
+          target="_blank"
+          className="btn-wsp transition-all"
+        >
+          <WhatsappIcon className="size-8" />
+        </Link>
         <FooterComp />
       </div>
     </Router>
