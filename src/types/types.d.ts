@@ -4,9 +4,13 @@ interface Service {
   precio: number;
   descripcion: string;
 }
+
 interface ServiceProps {
   service: Service;
 }
+
+type InputType = "text" | "email" | "password" | "textarea" | "date";
+
 interface InputAndSelect {
   id: string;
   name: string;
