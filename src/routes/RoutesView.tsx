@@ -4,10 +4,12 @@ import HomePage from "../pages/HomePage";
 import ServicesPage from "../pages/ServicesPage";
 import ContactPage from "../pages/ContactPage";
 import TurnsPage from "../pages/TurnsPage";
+import AdminLogin from "../pages/AdminLogin";
 
 const RoutesView = () => {
   return (
     <Routes>
+      <Route path="/administrador" element={<AdminLogin />} />
       <Route path="/servicios" element={<ServicesPage />} />
       <Route path="/contacto" element={<ContactPage />} />
       <Route path="/turnos" element={<TurnsPage />} />

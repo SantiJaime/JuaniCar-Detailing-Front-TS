@@ -4,10 +4,12 @@ import {
   TURN_INPUT_CLASSES,
   TURN_LABEL_CLASSES,
 } from "../constants/classes";
+import { type ReactNode } from "react";
 
 interface Props extends InputAndSelect {
   placeholder: string;
   type: InputType;
+  showPassButton?: ReactNode;
   onChange: (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
@@ -24,6 +26,7 @@ const InputComp: React.FC<Props> = ({
   value,
   errors,
   touched,
+  showPassButton,
 }) => {
   return (
     <div className="mb-3">
@@ -55,9 +58,17 @@ const InputComp: React.FC<Props> = ({
             value={value}
           />
         )}
-
+        {name === "password" && (
+          <div className="absolute inset-y-0 end-0 flex items-center pe-0.5">
+            {showPassButton}
+          </div>
+        )}
         {errors && touched && (
-          <div className={`${DIV_ICON_CLASSES} end-0 pe-3.5`}>
+          <div
+            className={`${DIV_ICON_CLASSES} end-0 ${
+              name === "password" ? "pe-5" : "pe-3.5"
+            }`}
+          >
             <ExclamationCircleIcon className="size-5 text-red-500" />
           </div>
         )}

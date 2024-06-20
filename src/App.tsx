@@ -5,6 +5,7 @@ import FooterComp from "./components/FooterComp";
 import Aos from "aos";
 import { PHONE_NUMBER } from "./constants/const";
 import { WhatsappIcon } from "./components/Icons";
+import { Toaster } from "sonner";
 
 const App = () => {
   Aos.init({
@@ -16,6 +17,7 @@ const App = () => {
       <div className="App">
         <NavbarComp />
         <main>
+          <Toaster richColors />
           <RoutesView />
         </main>
         <Link

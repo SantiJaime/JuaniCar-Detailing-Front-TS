@@ -59,3 +59,7 @@ export const SCHEDULES = [
   "16:00",
   "17:00",
 ];
+
+export const URL = import.meta.env.VITE_URL_API_LOCAL;
+
+export const TOKEN = sessionStorage.getItem("token")

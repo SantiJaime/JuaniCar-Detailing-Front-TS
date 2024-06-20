@@ -12,3 +12,11 @@ export const errorTurnSchema = yup.object().shape({
   fecha: yup.string().required("Campo fecha obligatorio"),
   horario: yup.string().required("Campo horario obligatorio"),
 });
+
+export const errorAdminLoginSchema = yup.object().shape({
+  email: yup
+    .string()
+    .required("Campo correo electrónico obligatorio")
+    .email("Formado de correo electrónico inválido"),
+  password: yup.string().required("Campo contraseña obligatorio"),
+});
