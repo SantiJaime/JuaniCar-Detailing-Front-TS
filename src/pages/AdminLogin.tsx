@@ -33,18 +33,17 @@ const AdminLogin = () => {
   const handleClick = async (values: User) => {
     try {
       const res = await loginAdmin(values);
-
       if (res instanceof Error) {
-        console.error(res.message);
         toast.error(res.message);
         return;
       }
 
       sessionStorage.setItem("token", JSON.stringify(res.token));
+      sessionStorage.setItem("role", JSON.stringify(res.user.role));
+      
       navigate("/panel-administrador");
     } catch (error) {
-      console.error("Error no manejado:", error);
-      toast.error("Ha ocurrido un error inesperado");
+      toast.error(`Ha ocurrido un error inesperado: ${error}`);
     }
   };
 

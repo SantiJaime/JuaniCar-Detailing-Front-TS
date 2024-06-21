@@ -8,8 +8,9 @@ import {
   WrenchScrewdriverIcon,
   XMarkIcon,
 } from "@heroicons/react/16/solid";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Image } from "react-bootstrap";
+import { ArrowRightStartOnRectangleIcon } from "@heroicons/react/24/outline";
 
 const NAVIGATION = [
   {
@@ -36,8 +37,26 @@ const NAVIGATION = [
 
 const NavbarComp = () => {
   const location = useLocation();
+  const navigate = useNavigate();
 
+  const [userInfo, setUserInfo] = useState({
+    token: sessionStorage.getItem("token") || "",
+    role: sessionStorage.getItem("token") || "",
+  });
   const [openNav, setOpenNav] = useState(false);
+
+  const token = sessionStorage.getItem("token") || "";
+  const role = sessionStorage.getItem("role") || "";
+
+  const handleLogout = () => {
+    sessionStorage.removeItem("token");
+    sessionStorage.removeItem("role");
+    navigate("/");
+  };
+
+  useEffect(() => {
+    setUserInfo({ token, role });
+  }, [token, role]);
 
   useEffect(() => {
     window.addEventListener(
@@ -60,6 +79,17 @@ const NavbarComp = () => {
           <span>{item.name}</span>
         </Link>
       ))}
+      {userInfo.token && userInfo.role && (
+        <button
+          className="flex items-center gap-2 rounded-lg p-1 font-medium hover:bg-blue-gray-200/20"
+          type="button"
+          aria-label="Cerrar sesión"
+          onClick={handleLogout}
+        >
+          <ArrowRightStartOnRectangleIcon className="size-5 text-gray-50" />
+          <span>Cerrar sesión</span>
+        </button>
+      )}
     </div>
   );
 

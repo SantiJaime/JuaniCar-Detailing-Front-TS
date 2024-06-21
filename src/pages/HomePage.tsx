@@ -3,9 +3,11 @@ import { Button, Typography } from "@material-tailwind/react";
 import { Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import CardComp from "../components/CardComp";
-import { SERVICES } from "../constants/const";
+import useServices from "../hooks/useServices";
 
 const HomePage = () => {
+  const { services } = useServices()
+
   return (
     <>
       <Container
@@ -47,7 +49,7 @@ const HomePage = () => {
         <Typography variant="h1">Nuestros servicios destacados</Typography>
         <hr />
         <Row>
-          {SERVICES.map((service: Service, index: number) => (
+          {services.map((service: Service, index: number) => (
             <CardComp key={index} service={service} />
           ))}
         </Row>

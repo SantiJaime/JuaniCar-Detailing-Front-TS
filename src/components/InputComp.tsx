@@ -4,12 +4,11 @@ import {
   TURN_INPUT_CLASSES,
   TURN_LABEL_CLASSES,
 } from "../constants/classes";
-import { type ReactNode } from "react";
 
 interface Props extends InputAndSelect {
   placeholder: string;
   type: InputType;
-  showPassButton?: ReactNode;
+  showPassButton?: JSX.Element;
   onChange: (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
