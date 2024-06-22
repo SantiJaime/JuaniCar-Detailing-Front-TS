@@ -17,7 +17,7 @@ const App = () => {
       <div className="App">
         <NavbarComp />
         <main>
-          <Toaster richColors />
+          <Toaster richColors position="top-right" />
           <RoutesView />
         </main>
         <Link

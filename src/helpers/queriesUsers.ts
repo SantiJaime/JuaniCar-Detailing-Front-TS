@@ -19,16 +19,16 @@ export const getUsers = async () => {
       const errorResponse: ErrorMessage = await response.json();
       throw new Error(errorResponse.msg);
     }
-    const res: UserResponse[] = await response.json();
-    return res;
+    const res: FullUserInfoResponse = await response.json();
+    return res.allUsers;
   } catch (error) {
     if (error instanceof Error) return error;
 
-    return new Error("Error desconocido");
+    throw new Error("Error desconocido");
   }
 };
 
-export const createUser = async (user: CreateUser) => {
+export const createUser = async (user: FullUserInfo) => {
   const token = sessionStorage.getItem("token");
   if (!token) {
     throw new Error(
@@ -52,6 +52,36 @@ export const createUser = async (user: CreateUser) => {
     return res;
   } catch (error) {
     if (error instanceof Error) return error;
+
+    throw new Error("Error desconocido");
+  }
+};
+
+export const deleteUser = async (id: string) => {
+  const token = sessionStorage.getItem("token");
+  if (!token) {
+    throw new Error(
+      "No tienes los permisos necesarios para realizar esta acción"
+    );
+  }
+  try {
+    const response = await fetch(`${URL}/users/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${JSON.parse(token)}`,
+      },
+    });
+    if (!response.ok) {
+      const errorResponse: ErrorMessage = await response.json();
+      throw new Error(errorResponse.msg);
+    }
+    const res: { msg: string } = await response.json();
+    return res;
+  } catch (error) {
+    if (error instanceof Error) return error;
+
+    throw new Error("Error desconocido");
   }
 };
 
@@ -74,7 +104,7 @@ export const loginAdmin = async (user: User) => {
   } catch (error) {
     if (error instanceof Error) return error;
 
-    return new Error("Error desconocido");
+    throw new Error("Error desconocido");
   }
 };
 
@@ -97,6 +127,6 @@ export const checkAuth = async (token: string) => {
   } catch (error) {
     if (error instanceof Error) return error;
 
-    return new Error("Error desconocido");
+    throw new Error("Error desconocido");
   }
 };

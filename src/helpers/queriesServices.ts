@@ -12,7 +12,7 @@ export const getServices = async () => {
   } catch (error) {
     if (error instanceof Error) return error;
 
-    return new Error("Error desconocido");
+    throw new Error("Error desconocido");
   }
 };
 
@@ -39,6 +39,6 @@ export const deleteService = async (id: string) => {
   } catch (error) {
     if (error instanceof Error) return error;
 
-    return new Error("Error desconocido");
+    throw new Error("Error desconocido");
   }
 };

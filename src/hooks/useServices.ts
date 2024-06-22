@@ -3,7 +3,7 @@ import { getServices } from "../helpers/queriesServices";
 import { toast } from "sonner";
 
 const useServices = () => {
-  const [services, setServices] = useState<Array<Service>>([]);
+  const [services, setServices] = useState<Service[]>([]);
 
   useEffect(() => {
     getServices()

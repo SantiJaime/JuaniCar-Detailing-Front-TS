@@ -31,5 +31,11 @@ export const TABLE_HEAD_SERVICES = [
   "Editar",
   "Eliminar",
 ];
+export const TABLE_HEAD_USERS = [
+  "Correo electrónico",
+  "Nombre",
+  "Editar",
+  "Eliminar",
+];
 
-export const URL = import.meta.env.VITE_URL_API_LOCAL;
+export const URL: string = import.meta.env.VITE_URL_API_LOCAL;

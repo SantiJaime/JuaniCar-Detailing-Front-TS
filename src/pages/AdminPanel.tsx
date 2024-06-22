@@ -8,8 +8,10 @@ import {
 import { WrenchScrewdriverIcon } from "@heroicons/react/24/outline";
 import { PersonGearIcon } from "../components/Icons";
 import TableComp from "../components/TableComp";
+import { useState } from "react";
 
 const AdminPanel = () => {
+  const [activeTab, setActiveTab] = useState("services");
   const tabHeaderData = [
     {
       label: "Servicios",
@@ -26,8 +28,12 @@ const AdminPanel = () => {
     <Tabs value="services" className="my-8">
       <TabsHeader className="bg-gray-900">
         {tabHeaderData.map(({ label, value, icon }) => (
-          <Tab key={value} value={value} className="text-gray-600">
-            <div className="flex items-center gap-2">
+          <Tab key={value} value={value} onClick={() => setActiveTab(value)}>
+            <div
+              className={`flex items-center gap-2 ${
+                activeTab === value ? "text-gray-900" : "text-gray-50"
+              }`}
+            >
               {icon}
               {label}
             </div>
@@ -36,7 +42,10 @@ const AdminPanel = () => {
       </TabsHeader>
       <TabsBody>
         <TabPanel value={"services"}>
-          <TableComp/>
+          <TableComp type="services" />
+        </TabPanel>
+        <TabPanel value={"users"}>
+          <TableComp type="users" />
         </TabPanel>
       </TabsBody>
     </Tabs>

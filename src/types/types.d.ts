@@ -35,7 +35,7 @@ interface ErrorMessage {
   msg: string;
 }
 
-interface UserResponse {
+interface FullUserInfo {
   _id: string;
   email: string;
   name: string;
@@ -44,7 +44,12 @@ interface UserResponse {
 
 interface CreateUserResponse {
   msg: string;
-  newUser: UserResponse;
+  newUser: FullUserInfo;
+}
+
+interface FullUserInfoResponse {
+  msg: string;
+  allUsers: UserResponse[];
 }
 
 interface LoginResponse {

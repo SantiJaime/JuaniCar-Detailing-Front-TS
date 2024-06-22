@@ -31,7 +31,7 @@ const ServiceView: React.FC<ServiceProps> = ({ service }) => {
             <Row>
               <Col sm={5}>
                 <Image
-                  src={service.img}
+                  src={service.imagen}
                   alt={service.nombre}
                   className="rounded-lg object-cover object-center"
                   width={"100%"}
