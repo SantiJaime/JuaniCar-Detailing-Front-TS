@@ -1,6 +1,6 @@
 import { CalendarDaysIcon, ListBulletIcon, PhoneIcon } from "@heroicons/react/24/outline";
 import { Button, Typography } from "@material-tailwind/react";
-import { Col, Container, Row } from "react-bootstrap";
+import { Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import CardComp from "../components/CardComp";
 import useServices from "../hooks/useServices";
