@@ -5,19 +5,22 @@ import {
   CardBody,
   Tooltip,
   IconButton,
+  Spinner,
 } from "@material-tailwind/react";
 import { TrashIcon } from "@heroicons/react/24/outline";
 import useServices from "../hooks/useServices";
+import useUsers from "../hooks/useUsers";
 import { deleteService } from "../helpers/queriesServices";
 import { toast } from "sonner";
 import { TABLE_HEAD_SERVICES, TABLE_HEAD_USERS } from "../constants/const";
 import { TABLE_TD_CLASSES } from "../constants/classes";
-import useUsers from "../hooks/useUsers";
 import { deleteUser } from "../helpers/queriesUsers";
 import Swal from "sweetalert2";
+import EditModalComp from "./EditModalComp";
+import CreateModalComp from "./CreateModalComp";
 
 interface Props {
-  type: string;
+  type: Type;
 }
 
 const TableComp: React.FC<Props> = ({ type }) => {
@@ -36,21 +39,27 @@ const TableComp: React.FC<Props> = ({ type }) => {
       cancelButtonText: "Cancelar",
     }).then(async (result) => {
       if (result.isConfirmed) {
+        const loadingToast = toast("Eliminando servicio...", {
+          icon: <Spinner />,
+          duration: 0,
+        });
         try {
           const res = await deleteService(id);
 
           if (res instanceof Error) {
+            toast.dismiss(loadingToast);
             toast.error(res.message);
             return;
           }
+          toast.dismiss(loadingToast);
           toast.success(res.msg);
           setServices((prevServices) =>
             prevServices.filter((service) => service._id !== id)
           );
         } catch (error) {
           if (error instanceof Error) {
+            toast.dismiss(loadingToast);
             toast.error(error.message);
-            return;
           }
         }
       }
@@ -80,7 +89,6 @@ const TableComp: React.FC<Props> = ({ type }) => {
         } catch (error) {
           if (error instanceof Error) {
             toast.error(error.message);
-            return;
           }
         }
       }
@@ -106,12 +114,7 @@ const TableComp: React.FC<Props> = ({ type }) => {
                 </Typography>
               </div>
               <div className="flex shrink-0 flex-col gap-2 sm:flex-row">
-                {/* <CreateModalComp
-            type={"prod"}
-            setData={setData}
-            setDataAux={setDataAux}
-            data={data}
-          /> */}
+                <CreateModalComp type={"services"} setServices={setServices} />
               </div>
             </div>
           </CardHeader>
@@ -173,12 +176,11 @@ const TableComp: React.FC<Props> = ({ type }) => {
                       </Typography>
                     </td>
                     <td className={TABLE_TD_CLASSES}>
-                      {/* <EditModalComp
-                        type="user"
-                        data={user}
-                        setData={setData}
-                        setDataAux={setDataAux}
-                      /> */}
+                      <EditModalComp
+                        type="services"
+                        service={service}
+                        setServices={setServices}
+                      />
                     </td>
                     <td className={TABLE_TD_CLASSES}>
                       <Tooltip
@@ -221,12 +223,7 @@ const TableComp: React.FC<Props> = ({ type }) => {
                 </Typography>
               </div>
               <div className="flex shrink-0 flex-col gap-2 sm:flex-row">
-                {/* <CreateModalComp
-          type={"prod"}
-          setData={setData}
-          setDataAux={setDataAux}
-          data={data}
-        /> */}
+                <CreateModalComp type={"users"} setUsers={setUsers} />
               </div>
             </div>
           </CardHeader>
@@ -271,12 +268,12 @@ const TableComp: React.FC<Props> = ({ type }) => {
                       </Typography>
                     </td>
                     <td className={TABLE_TD_CLASSES}>
-                      {/* <EditModalComp
-                      type="user"
-                      data={user}
-                      setData={setData}
-                      setDataAux={setDataAux}
-                    /> */}
+                      <EditModalComp
+                        type={"users"}
+                        setUsers={setUsers}
+                        userName={user.name}
+                        userId={user._id}
+                      />
                     </td>
                     <td className={TABLE_TD_CLASSES}>
                       <Tooltip

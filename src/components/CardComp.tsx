@@ -15,7 +15,7 @@ const CardComp: React.FC<ServiceProps> = ({ service }) => {
     <Col lg={4} md={6} sm={12} className="my-3 flex justify-center" data-aos="flip-left">
       <Card className="mt-6 w-96 bg-gray-900 text-gray-50">
         <CardHeader color="blue-gray" className="relative h-56">
-          <img src={service.img} alt={service.nombre} />
+          <img src={service.imagen} alt={service.nombre} />
         </CardHeader>
         <CardBody>
           <Typography variant="h5" color="white" className="mb-2">

@@ -10,13 +10,13 @@ interface ServiceProps {
   service: Service;
 }
 
-type InputType = "text" | "email" | "password" | "textarea" | "date";
+type InputType = "text" | "email" | "password" | "textarea" | "date" | "number";
 
 interface InputAndSelect {
   id: string;
   name: string;
   label: string;
-  value: string;
+  value: string | number;
   icon: JSX.Element;
   errors?: string;
   touched?: boolean;
@@ -47,6 +47,12 @@ interface CreateUserResponse {
   newUser: FullUserInfo;
 }
 
+interface ValuesCreateUser {
+  name: string;
+  email: string;
+  password: string;
+}
+
 interface FullUserInfoResponse {
   msg: string;
   allUsers: UserResponse[];
@@ -66,3 +72,34 @@ interface ServicesResponse {
   msg: string;
   services: Service[];
 }
+
+interface EditUserResponse {
+  msg: string;
+  updatedUser: FullUserInfo;
+}
+interface EditServiceResponse {
+  msg: string;
+  updatedService: Service;
+}
+
+interface ValuesService {
+  nombre: string;
+  precio: number;
+  descripcion: string;
+}
+
+interface CreateServiceValues extends ValuesService {
+  imagen: File | null;
+}
+
+interface NewServiceResponse extends ValuesService {
+  _id: string;
+  imagen: string;
+}
+
+interface CreateServiceResponse {
+  msg: string;
+  newService: NewServiceResponse;
+}
+
+type Type = "users" | "services"

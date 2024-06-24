@@ -52,7 +52,9 @@ const InputComp: React.FC<Props> = ({
             rows={3}
             name={name}
             onChange={onChange}
-            className={TURN_INPUT_CLASSES}
+            className={`${TURN_INPUT_CLASSES} ${
+              errors && touched && "!border-red-500"
+            }`}
             placeholder={placeholder}
             value={value}
           />

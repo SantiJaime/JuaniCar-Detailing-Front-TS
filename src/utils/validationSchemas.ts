@@ -20,3 +20,22 @@ export const errorAdminLoginSchema = yup.object().shape({
     .email("Formado de correo electrónico inválido"),
   password: yup.string().required("Campo contraseña obligatorio"),
 });
+
+export const errorEditUserSchema = yup.object().shape({
+  name: yup.string().required("Campo nombre y apellido obligatorio"),
+});
+
+export const errorEditServiceSchema = yup.object().shape({
+  nombre: yup.string().required("Campo nombre del servicio obligatorio"),
+  precio: yup.number().required("Campo precio del servicio obligatorio"),
+  descripcion: yup
+    .string()
+    .required("Campo descripción del servicio obligatorio"),
+});
+
+export const errorCreateServiceSchema = yup.object().shape({
+  nombre: yup.string().required("Campo nombre del servicio obligatorio"),
+  descripcion: yup.string().required("Campo descripción del servicio obligatorio"),
+  precio: yup.number().required("Campo precio del servicio obligatorio"),
+  imagen: yup.string().required("Campo imagen del servicio obligatorio"),
+})

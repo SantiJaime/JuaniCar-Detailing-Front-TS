@@ -10,8 +10,8 @@ const ServicesPage = () => {
       <Typography variant="h1">Nuestros servicios</Typography>
       <hr />
       <Row>
-        {services.map((service: Service, index: number) => (
-          <CardComp key={index} service={service} />
+        {services.map((service: Service) => (
+          <CardComp key={service._id} service={service} />
         ))}
       </Row>
     </Container>

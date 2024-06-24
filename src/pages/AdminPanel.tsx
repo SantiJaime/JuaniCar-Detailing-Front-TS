@@ -11,7 +11,8 @@ import TableComp from "../components/TableComp";
 import { useState } from "react";
 
 const AdminPanel = () => {
-  const [activeTab, setActiveTab] = useState("services");
+  const [activeTab, setActiveTab] = useState<Type>("services");
+
   const tabHeaderData = [
     {
       label: "Servicios",
@@ -28,7 +29,7 @@ const AdminPanel = () => {
     <Tabs value="services" className="my-8">
       <TabsHeader className="bg-gray-900">
         {tabHeaderData.map(({ label, value, icon }) => (
-          <Tab key={value} value={value} onClick={() => setActiveTab(value)}>
+          <Tab key={value} value={value} onClick={() => setActiveTab(value as Type)}>
             <div
               className={`flex items-center gap-2 ${
                 activeTab === value ? "text-gray-900" : "text-gray-50"
@@ -41,11 +42,8 @@ const AdminPanel = () => {
         ))}
       </TabsHeader>
       <TabsBody>
-        <TabPanel value={"services"}>
-          <TableComp type="services" />
-        </TabPanel>
-        <TabPanel value={"users"}>
-          <TableComp type="users" />
+        <TabPanel value={activeTab}>
+          <TableComp type={activeTab} />
         </TabPanel>
       </TabsBody>
     </Tabs>

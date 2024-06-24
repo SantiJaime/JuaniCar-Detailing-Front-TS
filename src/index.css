@@ -24,6 +24,7 @@ main {
   background-repeat: no-repeat;
   height: 85vh;
 }
+
 .fontTitle {
   font-size: 5rem;
   font-family: "Indie Flower", cursive;
@@ -85,7 +86,7 @@ main {
   -webkit-text-fill-color: transparent;
   color: transparent;
   transition: color 0.3s ease, -webkit-text-fill-color 0.3s ease;
-  border: solid 1px rgb(66 66 66);
+  border: solid 1px #424242;
 }
 .buttonWhite {
   background-color: rgb(66 66 66);
@@ -109,6 +110,26 @@ input:-webkit-autofill:active {
   transition: background-color 5000s ease-in-out 0s;
   box-shadow: inset 0 0 20px 20px #23232329;
 }
+.form-control {
+  background-color: #212121;
+  color: white;
+}
+.form-control:focus {
+  background-color: #212121;
+  color: white;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  appearance: textfield;
+}
+input[type="number"] {
+  appearance: none;
+}
+
 @media (width < 767px) {
   .formWidth {
     width: 100%;
@@ -122,8 +143,10 @@ input:-webkit-autofill:active {
 @media (width < 576px) {
   .rowButtons {
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    margin-bottom: 10px;
+    align-items: center;
+    /* margin-bottom: 10px; */
   }
 }
 @media (width < 486px) {

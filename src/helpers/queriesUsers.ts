@@ -28,7 +28,7 @@ export const getUsers = async () => {
   }
 };
 
-export const createUser = async (user: FullUserInfo) => {
+export const createUser = async (user: ValuesCreateUser) => {
   const token = sessionStorage.getItem("token");
   if (!token) {
     throw new Error(
@@ -38,7 +38,12 @@ export const createUser = async (user: FullUserInfo) => {
   try {
     const response = await fetch(`${URL}/users`, {
       method: "POST",
-      body: JSON.stringify(user),
+      body: JSON.stringify({
+        name: user.name,
+        email: user.email,
+        password: user.password,
+        role: "admin",
+      }),
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${JSON.parse(token)}`,
@@ -49,6 +54,35 @@ export const createUser = async (user: FullUserInfo) => {
       throw new Error(errorResponse.msg);
     }
     const res: CreateUserResponse = await response.json();
+    return res;
+  } catch (error) {
+    if (error instanceof Error) return error;
+
+    throw new Error("Error desconocido");
+  }
+};
+
+export const editUser = async (userName: string, id: string) => {
+  const token = sessionStorage.getItem("token");
+  if (!token) {
+    throw new Error(
+      "No tienes los permisos necesarios para realizar esta acción"
+    );
+  }
+  try {
+    const response = await fetch(`${URL}/users/${id}`, {
+      method: "PUT",
+      body: JSON.stringify({ name: userName }),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${JSON.parse(token)}`,
+      },
+    });
+    if (!response.ok) {
+      const errorResponse: ErrorMessage = await response.json();
+      throw new Error(errorResponse.msg);
+    }
+    const res: EditUserResponse = await response.json();
     return res;
   } catch (error) {
     if (error instanceof Error) return error;

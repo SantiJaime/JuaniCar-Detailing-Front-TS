@@ -10,7 +10,10 @@ import {
 } from "@heroicons/react/16/solid";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Image } from "react-bootstrap";
-import { ArrowRightStartOnRectangleIcon } from "@heroicons/react/24/outline";
+import {
+  ArrowRightStartOnRectangleIcon,
+  Cog8ToothIcon,
+} from "@heroicons/react/24/outline";
 
 const NAVIGATION = [
   {
@@ -32,6 +35,23 @@ const NAVIGATION = [
     name: "Contacto",
     href: "/contacto",
     icon: <PhoneIcon className="size-5" />,
+  },
+];
+const NAVIGATION_ADMIN = [
+  {
+    name: "Inicio",
+    href: "/",
+    icon: <HomeIcon className="size-5" />,
+  },
+  {
+    name: "Servicios",
+    href: "/servicios",
+    icon: <WrenchScrewdriverIcon className="size-5" />,
+  },
+  {
+    name: "Panel de administrador",
+    href: "/panel-administrador",
+    icon: <Cog8ToothIcon className="size-5" />,
   },
 ];
 
@@ -67,28 +87,43 @@ const NavbarComp = () => {
 
   const navList = (
     <div className="my-8 flex flex-col gap-3 lg:my-0 lg:flex-row lg:items-center">
-      {NAVIGATION.map((item) => (
-        <Link
-          to={item.href}
-          className={`flex items-center gap-2 rounded-lg p-1 font-medium hover:bg-blue-gray-200/20 ${
-            location.pathname === item.href && "bg-blue-gray-50/10"
-          }`}
-          key={item.name}
-        >
-          {item.icon}
-          <span>{item.name}</span>
-        </Link>
-      ))}
-      {userInfo.token && userInfo.role && (
-        <button
-          className="flex items-center gap-2 rounded-lg p-1 font-medium hover:bg-blue-gray-200/20"
-          type="button"
-          aria-label="Cerrar sesión"
-          onClick={handleLogout}
-        >
-          <ArrowRightStartOnRectangleIcon className="size-5 text-gray-50" />
-          <span>Cerrar sesión</span>
-        </button>
+      {userInfo.token && userInfo.role ? (
+        <>
+          {NAVIGATION_ADMIN.map((item) => (
+            <Link
+              to={item.href}
+              className={`flex items-center gap-2 rounded-lg p-1 font-medium hover:bg-blue-gray-200/20 ${
+                location.pathname === item.href && "bg-blue-gray-50/10"
+              }`}
+              key={item.name}
+            >
+              {item.icon}
+              <span>{item.name}</span>
+            </Link>
+          ))}
+          <button
+            className="flex items-center gap-2 rounded-lg p-1 font-medium hover:bg-blue-gray-200/20"
+            type="button"
+            aria-label="Cerrar sesión"
+            onClick={handleLogout}
+          >
+            <ArrowRightStartOnRectangleIcon className="size-5 text-gray-50" />
+            <span>Cerrar sesión</span>
+          </button>
+        </>
+      ) : (
+        NAVIGATION.map((item) => (
+          <Link
+            to={item.href}
+            className={`flex items-center gap-2 rounded-lg p-1 font-medium hover:bg-blue-gray-200/20 ${
+              location.pathname === item.href && "bg-blue-gray-50/10"
+            }`}
+            key={item.name}
+          >
+            {item.icon}
+            <span>{item.name}</span>
+          </Link>
+        ))
       )}
     </div>
   );
