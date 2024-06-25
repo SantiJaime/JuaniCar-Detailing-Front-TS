@@ -12,6 +12,7 @@ interface Props extends InputAndSelect {
   onChange: (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
+  disabled?: boolean;
 }
 
 const InputComp: React.FC<Props> = ({
@@ -22,6 +23,7 @@ const InputComp: React.FC<Props> = ({
   label,
   icon,
   onChange,
+  disabled,
   value,
   errors,
   touched,
@@ -42,9 +44,10 @@ const InputComp: React.FC<Props> = ({
             onChange={onChange}
             className={`${TURN_INPUT_CLASSES} ${
               errors && touched && "!border-red-500"
-            }`}
+            } ${disabled && "cursor-not-allowed"}`}
             placeholder={placeholder}
             value={value}
+            disabled={disabled}
           />
         ) : (
           <textarea

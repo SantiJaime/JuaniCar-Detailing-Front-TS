@@ -24,7 +24,7 @@ interface Props {
 }
 
 const TableComp: React.FC<Props> = ({ type }) => {
-  const { services, setServices } = useServices();
+  const { services, setServices, isLoading } = useServices();
   const { users, setUsers } = useUsers();
 
   const handleDeleteService = (id: string) => {
@@ -119,91 +119,99 @@ const TableComp: React.FC<Props> = ({ type }) => {
             </div>
           </CardHeader>
           <CardBody className="overflow-scroll">
-            <table className="mt-4 w-full min-w-max table-auto text-left">
-              <thead>
-                <tr>
-                  {TABLE_HEAD_SERVICES.map((head) => (
-                    <th
-                      key={head}
-                      className="border-white-100 border-y bg-gray-900 p-4"
-                    >
-                      <Typography
-                        color="white"
-                        className="font-bold leading-none"
+            {isLoading ? (
+              <div className="my-3 flex flex-col items-center justify-center gap-2">
+                <Spinner className="size-12" />
+                <Typography variant="h4" color="white">
+                  Cargando servicios...
+                </Typography>
+              </div>
+            ) : (
+              <table className="mt-4 w-full min-w-max table-auto">
+                <thead>
+                  <tr>
+                    {TABLE_HEAD_SERVICES.map((head) => (
+                      <th
+                        key={head}
+                        className="border-white-100 border-y bg-gray-900 p-4"
                       >
-                        {head}
-                      </Typography>
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody className="bg-gray-800">
-                {services.map((service: Service) => (
-                  <tr key={service._id}>
-                    <td className={TABLE_TD_CLASSES}>
-                      <div className="flex flex-col gap-3">
-                        <img
-                          src={service.imagen}
-                          alt={service.nombre}
-                          className="max-w-48 rounded-full text-gray-50"
-                        />
+                        <Typography
+                          color="white"
+                          className="font-bold leading-none"
+                        >
+                          {head}
+                        </Typography>
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody className="bg-gray-800">
+                  {services.map((service: Service) => (
+                    <tr key={service._id}>
+                      <td className={TABLE_TD_CLASSES}>
+                        <div className="flex flex-col gap-3">
+                          <img
+                            src={service.imagen}
+                            alt={service.nombre}
+                            className="max-w-48 rounded-full text-gray-50"
+                          />
+                          <Typography
+                            variant="paragraph"
+                            color="white"
+                            className="text-center font-bold"
+                          >
+                            {service.nombre}
+                          </Typography>
+                        </div>
+                      </td>
+                      <td className={TABLE_TD_CLASSES}>
                         <Typography
                           variant="small"
                           color="white"
                           className="font-normal"
                         >
-                          {service.nombre}
+                          ${service.precio}
                         </Typography>
-                      </div>
-                    </td>
-                    <td className={TABLE_TD_CLASSES}>
-                      <Typography
-                        variant="small"
-                        color="white"
-                        className="font-normal"
-                      >
-                        ${service.precio}
-                      </Typography>
-                    </td>
-
-                    <td className={TABLE_TD_CLASSES}>
-                      <Typography
-                        variant="small"
-                        color="white"
-                        className="font-normal"
-                      >
-                        {service.descripcion}
-                      </Typography>
-                    </td>
-                    <td className={TABLE_TD_CLASSES}>
-                      <EditModalComp
-                        type="services"
-                        service={service}
-                        setServices={setServices}
-                      />
-                    </td>
-                    <td className={TABLE_TD_CLASSES}>
-                      <Tooltip
-                        content="Eliminar servicio"
-                        className="bg-gray-100 text-gray-900"
-                        animate={{
-                          mount: { scale: 1, y: 0 },
-                          unmount: { scale: 0, y: 25 },
-                        }}
-                      >
-                        <IconButton
-                          variant="text"
-                          className="text-gray-50 hover:bg-gray-300/20 hover:text-red-600"
-                          onClick={() => handleDeleteService(service._id)}
+                      </td>
+                      <td className={TABLE_TD_CLASSES}>
+                        <Typography
+                          variant="small"
+                          color="white"
+                          className="font-normal"
                         >
-                          <TrashIcon className="size-6" />
-                        </IconButton>
-                      </Tooltip>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+                          {service.descripcion}
+                        </Typography>
+                      </td>
+                      <td className={TABLE_TD_CLASSES}>
+                        <EditModalComp
+                          type="services"
+                          service={service}
+                          setServices={setServices}
+                        />
+                      </td>
+                      <td className={TABLE_TD_CLASSES}>
+                        <Tooltip
+                          content="Eliminar servicio"
+                          className="bg-gray-100 text-gray-900"
+                          animate={{
+                            mount: { scale: 1, y: 0 },
+                            unmount: { scale: 0, y: 25 },
+                          }}
+                        >
+                          <IconButton
+                            variant="text"
+                            className="text-gray-50 hover:bg-gray-300/20 hover:text-red-600"
+                            onClick={() => handleDeleteService(service._id)}
+                          >
+                            <TrashIcon className="size-6" />
+                          </IconButton>
+                        </Tooltip>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
           </CardBody>
         </Card>
       ) : (
@@ -228,7 +236,7 @@ const TableComp: React.FC<Props> = ({ type }) => {
             </div>
           </CardHeader>
           <CardBody className="overflow-scroll">
-            <table className="mt-4 w-full min-w-max table-auto text-left">
+            <table className="mt-4 w-full min-w-max table-auto">
               <thead>
                 <tr>
                   {TABLE_HEAD_USERS.map((head) => (

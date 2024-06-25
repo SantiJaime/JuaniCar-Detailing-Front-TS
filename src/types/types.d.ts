@@ -73,6 +73,11 @@ interface ServicesResponse {
   services: Service[];
 }
 
+interface OneServiceResponse {
+  msg: string;
+  service: Service;
+}
+
 interface EditUserResponse {
   msg: string;
   updatedUser: FullUserInfo;
@@ -103,3 +108,8 @@ interface CreateServiceResponse {
 }
 
 type Type = "users" | "services"
+
+interface AvailableSchedulesResponse {
+  msg: string;
+  availableSchedules: string[]
+}

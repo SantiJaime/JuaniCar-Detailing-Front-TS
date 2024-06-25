@@ -16,6 +16,20 @@ export const getServices = async () => {
   }
 };
 
+export const getOneService = async (id: string) => {
+  try {
+    const response = await fetch(`${URL}/services/${id}`);
+    if (!response.ok) {
+      const errorResponse: ErrorMessage = await response.json();
+      throw new Error(errorResponse.msg);
+    }
+    const res: OneServiceResponse = await response.json();
+    return res.service;
+  } catch (error) {
+    if (error instanceof Error) return error;
+  }
+};
+
 export const createService = async (values: CreateServiceValues) => {
   const token = sessionStorage.getItem("token");
   if (!token) throw new Error("No estás autorizado");

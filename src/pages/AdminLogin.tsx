@@ -108,7 +108,7 @@ const AdminLogin = () => {
             )}
           </Formik>
         </Col>
-        <Col sm={12} className="my-2 flex justify-center">
+        <Col sm={12} className="my-2 flex justify-center" data-aos="fade-up">
           <Image src="/juani2.png" fluid />
         </Col>
       </Row>

@@ -7,6 +7,7 @@ import TurnsPage from "../pages/TurnsPage";
 import AdminLogin from "../pages/AdminLogin";
 import AdminPanel from "../pages/AdminPanel";
 import PrivateRoutes from "../components/PrivateRoutes";
+import SelectedServiceTurnPage from "../pages/SelectedServiceTurnPage";
 
 const RoutesView = () => {
   return (
@@ -19,6 +20,7 @@ const RoutesView = () => {
           </PrivateRoutes>
         }
       />
+      <Route path="/turnos/:id" element={<SelectedServiceTurnPage />} />
       <Route path="/administrador" element={<AdminLogin />} />
       <Route path="/servicios" element={<ServicesPage />} />
       <Route path="/contacto" element={<ContactPage />} />

@@ -1,12 +1,16 @@
-import { CalendarDaysIcon, ListBulletIcon, PhoneIcon } from "@heroicons/react/24/outline";
-import { Button, Typography } from "@material-tailwind/react";
+import {
+  CalendarDaysIcon,
+  ListBulletIcon,
+  PhoneIcon,
+} from "@heroicons/react/24/outline";
+import { Button, Spinner, Typography } from "@material-tailwind/react";
 import { Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import CardComp from "../components/CardComp";
 import useServices from "../hooks/useServices";
 
 const HomePage = () => {
-  const { services } = useServices();
+  const { services, isLoading } = useServices();
 
   return (
     <>
@@ -25,35 +29,42 @@ const HomePage = () => {
           <Typography variant="lead" color="white">
             Cuando dejen los vehículos como nosotros, nos etiquetan 😉
           </Typography>
-            <div className="rowButtons flex gap-2">
-              <Button variant="gradient" className="my-2 rounded-full">
-                <Link to={"/turnos"} className="flex items-center gap-2">
-                  <CalendarDaysIcon className="size-6" />
-                  <span>Solicitar turno ahora</span>
-                </Link>
-              </Button>
-              <Button variant="gradient" className="my-2 rounded-full">
-                <Link to={"/contacto"} className="flex items-center gap-2">
-                  <PhoneIcon className="size-6" />
-                  <span>Contáctame</span>
-                </Link>
-              </Button>
-            </div>
+          <div className="rowButtons flex gap-2">
+            <Button variant="gradient" className="my-2 rounded-full">
+              <Link to={"/turnos"} className="flex items-center gap-2">
+                <CalendarDaysIcon className="size-6" />
+                <span>Solicitar turno ahora</span>
+              </Link>
+            </Button>
+            <Button variant="gradient" className="my-2 rounded-full">
+              <Link to={"/contacto"} className="flex items-center gap-2">
+                <PhoneIcon className="size-6" />
+                <span>Contáctame</span>
+              </Link>
+            </Button>
+          </div>
         </section>
       </Container>
       <Container className="mt-8 text-gray-50" fluid data-aos="fade-up">
         <Typography variant="h1">Nuestros servicios</Typography>
         <hr />
         <Row>
-          {services.slice(0, 3).map((service: Service) => (
-            <CardComp key={service._id} service={service} />
-          ))}
+          {isLoading ? (
+            <div className="my-3 flex flex-col items-center justify-center gap-2">
+              <Spinner className="size-12" />
+              <Typography variant="h4">Cargando servicios...</Typography>
+            </div>
+          ) : (
+            services.map((service: Service) => (
+              <CardComp key={service._id} service={service} />
+            ))
+          )}
         </Row>
         <div className="mb-3 flex justify-center">
           <Button color="white" className="rounded-full">
             <Link to={"/servicios"} className="flex items-center gap-2">
-            <ListBulletIcon className="size-5"/>
-            <span>Ver todos</span>
+              <ListBulletIcon className="size-5" />
+              <span>Ver todos</span>
             </Link>
           </Button>
         </div>
