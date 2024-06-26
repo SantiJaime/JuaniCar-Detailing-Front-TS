@@ -16,15 +16,18 @@ import { CarIcon, EmailIcon } from "./Icons";
 import { addWeeks, format, nextSaturday, nextSunday } from "date-fns";
 import { es } from "date-fns/locale";
 import { useEffect, useState } from "react";
-import { getAvailableSchedules } from "../helpers/queriesTurns";
+import { createTurn, getAvailableSchedules } from "../helpers/queriesTurns";
 import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   serviceName?: string;
 }
 
 const TurnFormComp: React.FC<Props> = ({ serviceName }) => {
-  const [date, setDate] = useState<string>("");
+  const navigate = useNavigate();
+
+  const [date, setDate] = useState("");
   const [availableSchedules, setAvailableSchedules] = useState<string[]>([
     "Seleccione una fecha primero",
   ]);
@@ -58,8 +61,31 @@ const TurnFormComp: React.FC<Props> = ({ serviceName }) => {
     setWeekendDates(dates);
   }, []);
 
+  const handleCreateTurn = async (values: ValuesTurn) => {
+    if (!values.details) {
+      values.details = "Sin detalles adicionales";
+    }
+    try {
+      const res = await createTurn(values);
+      if (res instanceof Error) {
+        toast.error(res.message);
+        return;
+      }
+
+      toast.success(res, {
+        description: "Nos pondremos en contacto pronto",
+      });
+      navigate("/");
+    } catch (error) {
+      if (error instanceof Error) {
+        toast.error(error.message);
+      }
+    }
+  };
+
   useEffect(() => {
     if (date) {
+      console.log(date)
       getAvailableSchedules(date)
         .then((res) => {
           if (res instanceof Error) {
@@ -78,14 +104,14 @@ const TurnFormComp: React.FC<Props> = ({ serviceName }) => {
     <Formik
       initialValues={{
         email: "",
-        nombre: "",
-        vehiculo: "",
-        servicio: serviceName || "",
-        fecha: "",
-        horario: "",
-        detalles: "",
+        name: "",
+        vehicle: "",
+        service: serviceName || "",
+        date: "",
+        hour: "",
+        details: "",
       }}
-      onSubmit={(values) => console.log(values)}
+      onSubmit={(values) => handleCreateTurn(values)}
       validationSchema={errorTurnSchema}
     >
       {({ values, errors, touched, handleChange, handleSubmit }) => (
@@ -107,27 +133,27 @@ const TurnFormComp: React.FC<Props> = ({ serviceName }) => {
             touched={touched.email}
           />
           <InputComp
-            name="nombre"
+            name="name"
             type="text"
             icon={<UserCircleIcon className={classes} />}
             onChange={handleChange}
             id="nameId"
             placeholder="Ej: Juan Martinez"
             label="Nombre y apellido"
-            value={values.nombre}
-            errors={errors.nombre}
-            touched={touched.nombre}
+            value={values.name}
+            errors={errors.name}
+            touched={touched.name}
           />
           <SelectComp
             label="Tipo de vehículo"
             options={VEHICLES}
             id="vehicleId"
             onChange={handleChange}
-            name="vehiculo"
-            value={values.vehiculo}
+            name="vehicle"
+            value={values.vehicle}
             icon={<CarIcon className={classes} />}
-            errors={errors.vehiculo}
-            touched={touched.vehiculo}
+            errors={errors.vehicle}
+            touched={touched.vehicle}
           />
           {serviceName ? (
             <InputComp
@@ -136,7 +162,7 @@ const TurnFormComp: React.FC<Props> = ({ serviceName }) => {
               id="selectedServiceId"
               onChange={handleChange}
               placeholder={serviceName}
-              name="servicio"
+              name="service"
               value={serviceName}
               icon={<WrenchScrewdriverIcon className={classes} />}
               disabled={true}
@@ -147,18 +173,18 @@ const TurnFormComp: React.FC<Props> = ({ serviceName }) => {
               options={SERVICES_NAMES}
               id="serviceId"
               onChange={handleChange}
-              name="servicio"
-              value={values.servicio}
+              name="service"
+              value={values.service}
               icon={<WrenchScrewdriverIcon className={classes} />}
-              errors={errors.servicio}
-              touched={touched.servicio}
+              errors={errors.service}
+              touched={touched.service}
             />
           )}
           <Row className="divFecha">
             <Col lg={6}>
               <SelectComp
                 options={weekendDates}
-                name="fecha"
+                name="date"
                 id="dateId"
                 label="Fecha"
                 icon={<CalendarDaysIcon className={classes} />}
@@ -167,36 +193,36 @@ const TurnFormComp: React.FC<Props> = ({ serviceName }) => {
                   const date = event.target.value.split("- ")[1];
                   setDate(date);
                 }}
-                value={values.fecha}
-                errors={errors.fecha}
-                touched={touched.fecha}
+                value={values.date}
+                errors={errors.date}
+                touched={touched.date}
               />
             </Col>
             <Col lg={6}>
               <SelectComp
-                name="horario"
+                name="hour"
                 id="schedulesId"
                 label="Horarios"
                 icon={<ClockIcon className={classes} />}
                 options={availableSchedules}
                 onChange={handleChange}
-                value={values.horario}
-                errors={errors.horario}
-                touched={touched.horario}
+                value={values.hour}
+                errors={errors.hour}
+                touched={touched.hour}
               />
             </Col>
           </Row>
           <InputComp
             label="Detalles (opcionales)"
-            name="detalles"
+            name="details"
             id="detailsId"
             type="textarea"
             placeholder="Deje un breve mensaje en caso de necesitarlo"
             onChange={handleChange}
-            value={values.detalles}
+            value={values.details}
             icon={<ChatBubbleBottomCenterTextIcon className={classes} />}
-            errors={errors.detalles}
-            touched={touched.detalles}
+            errors={errors.details}
+            touched={touched.details}
           />
           <Button
             variant="filled"

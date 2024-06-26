@@ -46,7 +46,7 @@ const HomePage = () => {
         </section>
       </Container>
       <Container className="mt-8 text-gray-50" fluid data-aos="fade-up">
-        <Typography variant="h1">Nuestros servicios</Typography>
+        <Typography variant="h1">Algunos de nuestros servicios</Typography>
         <hr />
         <Row>
           {isLoading ? (
@@ -55,7 +55,7 @@ const HomePage = () => {
               <Typography variant="h4">Cargando servicios...</Typography>
             </div>
           ) : (
-            services.map((service: Service) => (
+            services.slice(0, 3).map((service: Service) => (
               <CardComp key={service._id} service={service} />
             ))
           )}

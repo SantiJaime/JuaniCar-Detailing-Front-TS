@@ -53,7 +53,7 @@ const ServiceView: React.FC<ServiceProps> = ({ service }) => {
                       </Typography>
                       <Button
                         variant="text"
-                        className="h-min p-2"
+                        className="h-min p-2 transition-all hover:bg-gray-700/50"
                         onClick={handleClose}
                       >
                         <XMarkIcon className="size-5 text-gray-50" />

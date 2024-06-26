@@ -113,3 +113,13 @@ interface AvailableSchedulesResponse {
   msg: string;
   availableSchedules: string[]
 }
+
+interface ValuesTurn {
+  email: string;
+  name: string;
+  service: string;
+  vehicle: string;
+  date: string;
+  hour: string;
+  details: string;
+}
