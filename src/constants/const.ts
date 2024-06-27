@@ -18,10 +18,20 @@ export const TABLE_HEAD_SERVICES = [
   "Editar",
   "Eliminar",
 ];
+
 export const TABLE_HEAD_USERS = [
   "Correo electrónico",
   "Nombre",
   "Editar",
+  "Eliminar",
+];
+
+export const TABLE_HEAD_TURNS = [
+  "Nombre y apellido",
+  "Correo electrónico",
+  "Servicio y vehículo",
+  "Fecha y hora",
+  "Detalles adicionales",
   "Eliminar",
 ];
 

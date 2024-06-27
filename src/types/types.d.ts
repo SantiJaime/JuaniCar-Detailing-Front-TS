@@ -107,11 +107,11 @@ interface CreateServiceResponse {
   newService: NewServiceResponse;
 }
 
-type Type = "users" | "services"
+type Type = "users" | "services" | "turns";
 
 interface AvailableSchedulesResponse {
   msg: string;
-  availableSchedules: string[]
+  availableSchedules: string[];
 }
 
 interface ValuesTurn {
@@ -122,4 +122,13 @@ interface ValuesTurn {
   date: string;
   hour: string;
   details: string;
+}
+
+interface Turn extends ValuesTurn {
+  _id: string;
+}
+
+interface TurnResponse {
+  msg: string;
+  allTurns: Turn[];
 }

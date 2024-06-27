@@ -1,5 +1,30 @@
 import { URL } from "../constants/const";
 
+export const getAllTurns = async () => {
+  const token = sessionStorage.getItem("token");
+  if (!token) throw new Error("No estás autorizado");
+  try {
+    const response = await fetch(`${URL}/turns`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${JSON.parse(token)}`,
+      },
+    });
+    if (!response.ok) {
+      const errorResponse: ErrorMessage = await response.json();
+      throw new Error(errorResponse.msg);
+    }
+
+    const res: TurnResponse = await response.json();
+    return res.allTurns;
+  } catch (error) {
+    if (error instanceof Error) return error;
+
+    throw new Error("Error desconocido");
+  }
+};
+
 export const getAvailableSchedules = async (date: string) => {
   try {
     const response = await fetch(
@@ -26,7 +51,7 @@ export const createTurn = async (values: ValuesTurn) => {
     }
     const formatedDate = values.date.split("- ")[1];
     values.date = formatedDate;
-     
+
     const response = await fetch(`${URL}/turns`, {
       method: "POST",
       headers: {
@@ -49,6 +74,30 @@ export const createTurn = async (values: ValuesTurn) => {
 
     const { msg } = await response.json();
     return msg;
+  } catch (error) {
+    if (error instanceof Error) return error;
+
+    throw new Error("Error desconocido");
+  }
+};
+
+export const deleteTurn = async (id: string) => {
+  const token = sessionStorage.getItem("token");
+  if (!token) throw new Error("No estás autorizado");
+  try {
+    const response = await fetch(`${URL}/turns/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${JSON.parse(token)}`,
+      },
+    });
+    if (!response.ok) {
+      const errorResponse: ErrorMessage = await response.json();
+      throw new Error(errorResponse.msg);
+    }
+    const res: { msg: string } = await response.json();
+    return res;
   } catch (error) {
     if (error instanceof Error) return error;
 

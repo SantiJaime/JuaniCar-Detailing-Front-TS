@@ -5,7 +5,10 @@ import {
   Tab,
   TabPanel,
 } from "@material-tailwind/react";
-import { WrenchScrewdriverIcon } from "@heroicons/react/24/outline";
+import {
+  CalendarDaysIcon,
+  WrenchScrewdriverIcon,
+} from "@heroicons/react/24/outline";
 import { PersonGearIcon } from "../components/Icons";
 import TableComp from "../components/TableComp";
 import { useState } from "react";
@@ -24,12 +27,21 @@ const AdminPanel = () => {
       value: "users",
       icon: <PersonGearIcon className="size-5" />,
     },
+    {
+      label: "Turnos registrados",
+      value: "turns",
+      icon: <CalendarDaysIcon className="size-5" />,
+    },
   ];
   return (
     <Tabs value="services" className="my-8">
       <TabsHeader className="bg-gray-900">
         {tabHeaderData.map(({ label, value, icon }) => (
-          <Tab key={value} value={value} onClick={() => setActiveTab(value as Type)}>
+          <Tab
+            key={value}
+            value={value}
+            onClick={() => setActiveTab(value as Type)}
+          >
             <div
               className={`flex items-center gap-2 ${
                 activeTab === value ? "text-gray-900" : "text-gray-50"

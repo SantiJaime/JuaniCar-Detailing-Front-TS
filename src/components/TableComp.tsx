@@ -12,12 +12,18 @@ import useServices from "../hooks/useServices";
 import useUsers from "../hooks/useUsers";
 import { deleteService } from "../helpers/queriesServices";
 import { toast } from "sonner";
-import { TABLE_HEAD_SERVICES, TABLE_HEAD_USERS } from "../constants/const";
+import {
+  TABLE_HEAD_SERVICES,
+  TABLE_HEAD_TURNS,
+  TABLE_HEAD_USERS,
+} from "../constants/const";
 import { TABLE_TD_CLASSES } from "../constants/classes";
 import { deleteUser } from "../helpers/queriesUsers";
 import Swal from "sweetalert2";
 import EditModalComp from "./EditModalComp";
 import CreateModalComp from "./CreateModalComp";
+import useTurns from "../hooks/useTurns";
+import { deleteTurn } from "../helpers/queriesTurns";
 
 interface Props {
   type: Type;
@@ -26,6 +32,7 @@ interface Props {
 const TableComp: React.FC<Props> = ({ type }) => {
   const { services, setServices, isLoading } = useServices();
   const { users, setUsers } = useUsers();
+  const { turns, setTurns } = useTurns();
 
   const handleDeleteService = (id: string) => {
     Swal.fire({
@@ -86,6 +93,35 @@ const TableComp: React.FC<Props> = ({ type }) => {
           }
           toast.success(res.msg);
           setUsers((prevUsers) => prevUsers.filter((user) => user._id !== id));
+        } catch (error) {
+          if (error instanceof Error) {
+            toast.error(error.message);
+          }
+        }
+      }
+    });
+  };
+
+  const handleDeleteTurn = async (id: string) => {
+    Swal.fire({
+      title: "¿Estás seguro de borrar este turno?",
+      text: "Esta acción no se puede deshacer",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#00913f",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Sí, borrar",
+      cancelButtonText: "Cancelar",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const res = await deleteTurn(id);
+          if (res instanceof Error) {
+            toast.error(res.message);
+            return;
+          }
+          toast.success(res.msg);
+          setTurns((prevTurns) => prevTurns.filter((turn) => turn._id !== id));
         } catch (error) {
           if (error instanceof Error) {
             toast.error(error.message);
@@ -214,7 +250,7 @@ const TableComp: React.FC<Props> = ({ type }) => {
             )}
           </CardBody>
         </Card>
-      ) : (
+      ) : type === "users" ? (
         <Card className="size-full bg-gray-900">
           <CardHeader
             floated={false}
@@ -307,6 +343,123 @@ const TableComp: React.FC<Props> = ({ type }) => {
             </table>
           </CardBody>
         </Card>
+      ) : type === "turns" ? (
+        <Card className="size-full bg-gray-900">
+          <CardHeader
+            floated={false}
+            shadow={false}
+            className="rounded-none bg-gray-900"
+          >
+            <div className="tableHead flex items-center justify-between gap-4">
+              <div>
+                <Typography variant="h5" color="white">
+                  Lista de turnos registrados
+                </Typography>
+                <Typography color="white" className="mt-1 font-normal">
+                  Observe todos los turnos solicitados por los usuarios
+                </Typography>
+              </div>
+            </div>
+          </CardHeader>
+          <CardBody className="overflow-scroll">
+            {turns.length === 0 ? (
+              <Typography variant="h3" color="white" className="text-center">
+                No hay turnos registrador por el momento
+              </Typography>
+            ) : (
+              <table className="mt-4 w-full min-w-max table-auto">
+                <thead>
+                  <tr>
+                    {TABLE_HEAD_TURNS.map((head) => (
+                      <th
+                        key={head}
+                        className="border-white-100 border-y bg-gray-900 p-4"
+                      >
+                        <Typography
+                          color="white"
+                          className="font-bold leading-none"
+                        >
+                          {head}
+                        </Typography>
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody className="bg-gray-800">
+                  {turns.map((turn: Turn) => (
+                    <tr key={turn._id}>
+                      <td className={TABLE_TD_CLASSES}>
+                        <Typography
+                          variant="small"
+                          color="white"
+                          className="font-normal"
+                        >
+                          {turn.name}
+                        </Typography>
+                      </td>
+                      <td className={TABLE_TD_CLASSES}>
+                        <Typography
+                          variant="small"
+                          color="white"
+                          className="font-normal"
+                        >
+                          {turn.email}
+                        </Typography>
+                      </td>
+                      <td className={TABLE_TD_CLASSES}>
+                        <Typography
+                          variant="small"
+                          color="white"
+                          className="font-normal"
+                        >
+                          {turn.service} - {turn.vehicle}
+                        </Typography>
+                      </td>
+                      <td className={TABLE_TD_CLASSES}>
+                        <Typography
+                          variant="small"
+                          color="white"
+                          className="font-normal"
+                        >
+                          {turn.date} - {turn.hour}
+                        </Typography>
+                      </td>
+                      <td className={TABLE_TD_CLASSES}>
+                        <Typography
+                          variant="small"
+                          color="white"
+                          className="font-normal"
+                        >
+                          {turn.details}
+                        </Typography>
+                      </td>
+                      <td className={TABLE_TD_CLASSES}>
+                        <Tooltip
+                          content="Eliminar turno"
+                          className="bg-gray-100 text-gray-900"
+                          animate={{
+                            mount: { scale: 1, y: 0 },
+                            unmount: { scale: 0, y: 25 },
+                          }}
+                        >
+                          <IconButton
+                            variant="text"
+                            className="text-gray-50 hover:bg-gray-300/20 hover:text-red-600"
+                            onClick={() => handleDeleteTurn(turn._id)}
+                          >
+                            <TrashIcon className="size-6" />
+                          </IconButton>
+                        </Tooltip>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
+          </CardBody>
+        </Card>
+      ) : (
+        ""
       )}
     </>
   );

@@ -85,7 +85,6 @@ const TurnFormComp: React.FC<Props> = ({ serviceName }) => {
 
   useEffect(() => {
     if (date) {
-      console.log(date)
       getAvailableSchedules(date)
         .then((res) => {
           if (res instanceof Error) {
@@ -155,31 +154,21 @@ const TurnFormComp: React.FC<Props> = ({ serviceName }) => {
             errors={errors.vehicle}
             touched={touched.vehicle}
           />
-          {serviceName ? (
-            <InputComp
-              type="text"
-              label="Servicio a solicitar"
-              id="selectedServiceId"
-              onChange={handleChange}
-              placeholder={serviceName}
-              name="service"
-              value={serviceName}
-              icon={<WrenchScrewdriverIcon className={classes} />}
-              disabled={true}
-            />
-          ) : (
-            <SelectComp
-              label="Servicio a solicitar"
-              options={SERVICES_NAMES}
-              id="serviceId"
-              onChange={handleChange}
-              name="service"
-              value={values.service}
-              icon={<WrenchScrewdriverIcon className={classes} />}
-              errors={errors.service}
-              touched={touched.service}
-            />
-          )}
+
+          <SelectComp
+            label="Servicio a solicitar"
+            options={SERVICES_NAMES}
+            id="serviceId"
+            onChange={handleChange}
+            name="service"
+            value={
+              serviceName ? (values.service = serviceName) : values.service
+            }
+            icon={<WrenchScrewdriverIcon className={classes} />}
+            errors={errors.service}
+            touched={touched.service}
+            disabled={serviceName ? true : false}
+          />
           <Row className="divFecha">
             <Col lg={6}>
               <SelectComp

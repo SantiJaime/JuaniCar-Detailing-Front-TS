@@ -8,6 +8,7 @@ import {
 interface Props extends InputAndSelect {
   options: string[];
   onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+  disabled?: boolean;
 }
 
 const SelectComp: React.FC<Props> = ({
@@ -18,6 +19,7 @@ const SelectComp: React.FC<Props> = ({
   icon,
   value,
   options,
+  disabled,
   errors,
   touched,
 }) => {
@@ -33,7 +35,8 @@ const SelectComp: React.FC<Props> = ({
           name={name}
           onChange={onChange}
           value={value}
-          className={`${TURN_INPUT_CLASSES} ${errors && touched && "!border-red-500"}`}
+          disabled={disabled}
+          className={`${TURN_INPUT_CLASSES} ${errors && touched && "!border-red-500"} ${disabled && "cursor-not-allowed"}`}
         >
           {options.map((option: string, index: number) => (
             <option
