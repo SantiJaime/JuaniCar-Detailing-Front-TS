@@ -1,6 +1,7 @@
 import { Button, Typography } from "@material-tailwind/react";
 import { Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { PHONE_NUMBER } from "../constants/const";
 
 const ContactPage = () => {
   return (
@@ -22,7 +23,7 @@ const ContactPage = () => {
             <Col sm={12} md={12} lg={4} className="my-3">
               <h5 className="font-bold underline">Contacto</h5>
               <ul>
-                <li>Teléfono: {import.meta.env.VITE_PHONE_NUMBER}</li>
+                <li>Teléfono: {PHONE_NUMBER}</li>
               </ul>
             </Col>
             <Col sm={12} md={12} lg={4} className="my-3">
@@ -47,7 +48,7 @@ const ContactPage = () => {
             fullWidth
           >
             <Link
-              to={`https://wa.me/${import.meta.env.VITE_PHONE_NUMBER}`}
+              to={`https://wa.me/${PHONE_NUMBER}`}
               target="_blank"
               className="flex flex-col items-center justify-center gap-2"
             >

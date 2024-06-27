@@ -7,13 +7,14 @@ import { Button, Typography } from "@material-tailwind/react";
 import { useState } from "react";
 import { Col, Image, Row } from "react-bootstrap";
 import Modal from "react-bootstrap/Modal";
+import { Link } from "react-router-dom";
 
 const ServiceView: React.FC<ServiceProps> = ({ service }) => {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  
+
   return (
     <>
       <Button
@@ -25,13 +26,19 @@ const ServiceView: React.FC<ServiceProps> = ({ service }) => {
         <ArrowLongRightIcon className="size-5" />
       </Button>
 
-      <Modal show={show} onHide={handleClose} centered size="xl" className="modal-open">
+      <Modal
+        show={show}
+        onHide={handleClose}
+        centered
+        size="xl"
+        className="modal-open"
+      >
         <div className="bg-gray-900">
           <Modal.Body>
             <Row>
               <Col sm={5}>
                 <Image
-                  src={service.img}
+                  src={service.imagen}
                   alt={service.nombre}
                   className="rounded-lg object-cover object-center"
                   width={"100%"}
@@ -44,7 +51,11 @@ const ServiceView: React.FC<ServiceProps> = ({ service }) => {
                       <Typography variant="h2" color="white">
                         {service.nombre}
                       </Typography>
-                      <Button variant="text" className="h-min p-2" onClick={handleClose}>
+                      <Button
+                        variant="text"
+                        className="h-min p-2 transition-all hover:bg-gray-700/50"
+                        onClick={handleClose}
+                      >
                         <XMarkIcon className="size-5 text-gray-50" />
                       </Button>
                     </div>
@@ -57,14 +68,14 @@ const ServiceView: React.FC<ServiceProps> = ({ service }) => {
                     </Typography>
                   </Col>
                   <Col sm={12}>
-                    <Button
-                      variant="gradient"
-                      color="deep-purple"
-                      className="flex items-center justify-center gap-2 normal-case"
-                      fullWidth
-                    >
-                      <CalendarDaysIcon className="size-8" />
-                      <span className="text-lg">Solicitar turno</span>
+                    <Button variant="filled" color="white" fullWidth>
+                      <Link
+                        to={`/turnos/${service._id}`}
+                        className="flex items-center justify-center gap-2 normal-case"
+                      >
+                        <CalendarDaysIcon className="size-8" />
+                        <span className="text-lg">Solicitar turno</span>
+                      </Link>
                     </Button>
                   </Col>
                 </Row>
