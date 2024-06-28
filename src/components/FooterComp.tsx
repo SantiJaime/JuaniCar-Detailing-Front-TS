@@ -10,7 +10,7 @@ const FooterComp = () => {
       <div className="flex flex-row flex-wrap items-center justify-center gap-x-12 gap-y-6 text-center md:justify-between">
         <Link to={"/"} className="link-container">
           <Image
-            src="/logo.png"
+            src="/JuaniLogo.png"
             alt="JuaniCar Detailing Logo"
             className="size-28"
             fluid

@@ -136,7 +136,7 @@ const NavbarComp = () => {
       <div className="container mx-auto flex items-center">
         <Link to={"/"} className="link-container">
           <Image
-            src="/logo.png"
+            src="/JuaniLogo.png"
             alt="JuaniCar Detailing Logo"
             className="size-24"
             fluid
