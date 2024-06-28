@@ -35,4 +35,4 @@ export const TABLE_HEAD_TURNS = [
   "Eliminar",
 ];
 
-export const URL: string = import.meta.env.VITE_URL_API_LOCAL;
+export const URL: string = import.meta.env.VITE_URL_API_DEPLOY;
