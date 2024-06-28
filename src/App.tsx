@@ -24,6 +24,7 @@ const App = () => {
           to={`https://wa.me/${PHONE_NUMBER}`}
           target="_blank"
           className="btn-wsp transition-all"
+          aria-label="Envíar mensaje por Whatsapp"
         >
           <WhatsappIcon className="size-8" />
         </Link>
